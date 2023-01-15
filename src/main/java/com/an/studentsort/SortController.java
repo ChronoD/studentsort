@@ -1,10 +1,8 @@
 package com.an.studentsort;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*")
@@ -13,6 +11,11 @@ public class SortController {
 
     @GetMapping
     public String getSorted1(){
+        return "hello";
+    }
+
+    @PostMapping("/a")
+    public String getSorted2(@RequestParam("file") MultipartFile file){
         return "hello";
     }
 }
