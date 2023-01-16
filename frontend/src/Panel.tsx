@@ -18,7 +18,7 @@ import {
 interface SortResult {
   students: { name: string; grade: number }[];
   sortingMethod: string;
-  timeElapsed: number;
+  timeElapsedInMs: number;
   sortedFile: File;
 }
 
@@ -26,7 +26,7 @@ export function Panel() {
   const [file, setFile] = useState<string | Blob>("");
   const [isFileSelected, setIsFileSelected] = useState<boolean>(false);
 
-  const [sortMethod, setSortMethod] = useState("b");
+  const [sortMethod, setSortMethod] = useState("bubble");
 
   const [response, setResponse] = useState<SortResult | undefined>();
   const [responseError, setResponseError] = useState<Error | undefined>();
@@ -117,9 +117,21 @@ export function Panel() {
           value={sortMethod}
           onChange={handleSortMethodChange}
         >
-          <FormControlLabel value="b" control={<Radio />} label="Bubble sort" />
-          <FormControlLabel value="h" control={<Radio />} label="Heap sort" />
-          <FormControlLabel value="m" control={<Radio />} label="Merge sort" />
+          <FormControlLabel
+            value="bubble"
+            control={<Radio />}
+            label="Bubble sort"
+          />
+          <FormControlLabel
+            value="heap"
+            control={<Radio />}
+            label="Heap sort"
+          />
+          <FormControlLabel
+            value="merge"
+            control={<Radio />}
+            label="Merge sort"
+          />
         </RadioGroup>
       </FormControl>
       {isFileSelected && (
@@ -140,7 +152,7 @@ export function Panel() {
               Sorting method: <b>{response?.sortingMethod}</b>
             </p>
             <p>
-              Time taken: <b>{response?.timeElapsed}</b>
+              Time taken (ms): <b>{response?.timeElapsedInMs}</b>
             </p>
           </div>
           <Button disableRipple onClick={downloadSortedData}>
